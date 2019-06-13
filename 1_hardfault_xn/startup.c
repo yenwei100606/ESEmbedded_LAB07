@@ -41,7 +41,16 @@ void reset_handler(void)
 	blink_count(LED_BLUE, 20);
 
 	// execute from 0x40000000
-	??????
+	/*
+	 * is the same as
+	 * void (*fptr)(void);
+	 * fptr = 0x40000000;
+	 * fptr();
+	 * or assembly works fine also
+     * __asm__ volatile("bl 40000000;");
+	 **/
+	((void(*)())0x40000000)();
+	
 
 	blink(LED_BLUE);
 }
